@@ -1,0 +1,103 @@
+<nav
+  class="sticky top-0 z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 bg-black"
+>
+  <div
+    class="container px-4 mx-auto flex flex-wrap items-center justify-between"
+  >
+    <div
+      class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start"
+    >
+      <a
+        class="text-xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
+        [routerLink]="['']"
+        >Home</a
+      ><button
+        class="cursor-pointer text-xl leading-none py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+        type="button"
+        (click)="toggleNavbar()"
+      >
+        <svg viewBox="0 0 24 24" class="h-10 w-10">
+          <path
+            d="M4 18L20 18"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+          <path
+            d="M4 12L20 12"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+          <path
+            d="M4 6L20 6"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+    </div>
+    <div
+      class="lg:flex flex-grow items-center bg-white lg:bg-transparent lg:shadow-none"
+      [ngClass]="{ hidden: !showMenu, block: showMenu }"
+    >
+      <ul class="flex flex-col lg:flex-row list-none mr-auto">
+        <li class="flex items-center">
+          <a
+            class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-1 py-4 lg:py-2 flex items-center text-ms uppercase font-bold"
+            [routerLink]="['articles']"
+            ><i
+              class="lg:text-gray-300 text-gray-500 far fa-file-alt text-lg leading-lg mr-2"
+            ></i
+            >Articles</a
+          >
+        </li>
+      </ul>
+      <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
+        <li class="flex items-center">
+          <a
+            class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-ms uppercase font-bold"
+            [routerLink]="['admin/article_new']"
+            *ngIf="authService.isAdmin"
+            ><i
+              class="lg:text-gray-300 text-gray-500 fab fa-twitter text-lg leading-lg"
+            ></i
+            >Create Article</a
+          >
+        </li>
+        <!-- <li class="flex items-center">
+          <a
+            class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-ms uppercase font-bold"
+            [routerLink]="['auth/register']"
+            ><i
+              class="lg:text-gray-300 text-gray-500 fab fa-github text-lg leading-lg"
+            ></i
+            >Register</a
+          >
+        </li> -->
+        <li class="flex items-center" *ngIf="!authService.isConnected">
+          <a
+            class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-ms uppercase font-bold"
+            [routerLink]="['auth/login']"
+            ><i
+              class="lg:text-gray-300 text-gray-500 fab fa-github text-lg leading-lg"
+            ></i
+            >Login</a
+          >
+        </li>
+        <li class="flex items-center" *ngIf="authService.isConnected">
+          <button
+            class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-ms uppercase font-bold"
+            (click)="authService.logout()"
+          >
+            <i
+              class="lg:text-gray-300 text-gray-500 fab fa-github text-lg leading-lg"
+            ></i
+            >Logout
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
